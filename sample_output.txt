@@ -1,0 +1,142 @@
+<QUESTION>:  Is Kubrick a director?
+<Query>:
+["select count(*)  from person p  inner join director d on p.id = d.director_id  where p.name like '%Kubrick%'"]
+<ANSWER>:  yes
+
+<QUESTION>:  Is Neeson an actor?
+<Query>:
+["select count(*)  from person p  inner join actor a on p.id = a.actor_id  where p.name like '%Neeson%'"]
+<ANSWER>:  yes
+
+<QUESTION>:  Is Mighty Aphrodite by Allen?
+<Query>:
+["select count(*) from person p  inner join director d on p.id = d.director_id inner join movie m on m.id = d.movie_id where p.name like '%Aphrodite%' and m.name like '%Allen%'", "select count(*) from person p  inner join director d on p.id = d.director_id inner join movie m on m.id = d.movie_id where p.name like '%Allen%' and m.name like '%Aphrodite%'"]
+<ANSWER>:  yes
+
+<QUESTION>:  Was Loren born in Italy?
+<Query>:
+["select count(*) from person p where p.name like '%Loren%' and pob like '%Italy%'"]
+<ANSWER>:  yes
+
+<QUESTION>:  Was Birdman the best movie in 2015?
+<Query>:
+["select count(*) from movie m inner join oscar o on m.id = o.movie_id where m.name like '%Birdman%'and o.year = '2015' and o.type = 'BEST-PICTURE'"]
+<ANSWER>:  yes
+
+<QUESTION>:  Did Neeson star in Schindler's List?
+<Query>:
+[]
+<ANSWER>:  I don't know
+
+<QUESTION>:  Did Swank win the oscar in 2000?
+<Query>:
+["select count(*) from movie m inner join oscar o on m.id = o.movie_id where m.name like '%Swank%'  and o.year = '2000'", "select count(*) from person p inner join oscar o on p.id = o.person_id where p.name like '%Swank%' and o.year = '2000'"]
+<ANSWER>:  yes
+
+<QUESTION>:  Did a French actor win the oscar in 2012?
+<Query>:
+[]
+<ANSWER>:  I don't know
+
+<QUESTION>:  Did a movie with Neeson win the oscar for best film?
+<Query>:
+["select count(*)  from person p inner join actor a on p.id = a.actor_id inner join movie m on a.movie_id = m.id where p.name like '%Neeson%' and m.name like '%%'", "select count(*)  from person p inner join director d on p.id = d.director_id inner join movie m on d.movie_id = m.id where p.name like '%Neeson%' and m.name like '%%'"]
+<ANSWER>:  yes
+
+<QUESTION>:  Who directed SchindlersList?
+<Query>:
+["select p.name from person p inner join director d on p.id = d.director_id inner join movie m on d.movie_id = m.id and m.name like '%SchindlersList%'"]
+<ANSWER>:  None
+
+<QUESTION>:  Who won the oscar for best actor in 2005?
+<Query>:
+["select p.name from person p inner join oscar o on p.id = o.person_id where o.year = '2005' and o.type like '%best-actor%'"]
+<ANSWER>:  Jamie Foxx
+
+<QUESTION>:  Who directed the best movie in 2010?
+<Query>:
+["select p.name from person p inner join director d on p.id = d.director_id inner join oscar o on o.movie_id = d.movie_id where o.type like 'best-picture' and o.year = '2010'"]
+<ANSWER>:  Kathryn Bigelow
+
+<QUESTION>:  Which actress won the oscar in 2012?
+<Query>:
+["select p.name from person p inner join oscar o on p.id = o.person_id where o.year = '2012' and o.type like '%best-actress%'"]
+<ANSWER>:  Meryl Streep
+
+<QUESTION>:  Which movie won the oscar in 2000?
+<Query>:
+["select m.name from movie m inner join oscar o on m.id = o.movie_id where o.type like '%best-picture%'  and o.year = '2000'"]
+<ANSWER>:  American Beauty
+
+<QUESTION>:  When did Blanchett win an oscar for best actress?
+<Query>:
+["select o.year from oscar o inner join person p on o.person_id = p.id where p.name like '%Blanchett%' and o.type like '%best-actress%'"]
+<ANSWER>:  2014
+
+<QUESTION>:  Did Jamie Foxx win the oscar for best actor in 2005?
+<Query>:
+["select count(*) from person p inner join oscar o on p.id = o.person_id where o.year = '2005' and o.type like '%best-actor%'"]
+<ANSWER>:  yes
+
+<QUESTION>:  Which French actor win the oscar in 2012?
+<Query>:
+[]
+<ANSWER>:  I don't know
+
+<QUESTION>:  Did MerylStreep won the oscar in 2012?
+['(']
+<Query>:
+["select count(*) from movie m inner join oscar o on m.id = o.movie_id where m.name like '%MerylStreep%'  and o.year = '2012'", "select count(*) from person p inner join oscar o on p.id = o.person_id where p.name like '%MerylStreep%' and o.year = '2012'"]
+<ANSWER>:  no
+
+<QUESTION>:  When did Meryl Streep won the oscar for best actress?
+<Query>:
+["select o.year from oscar o inner join person p on o.person_id = p.id where p.name like '%Meryl%' and o.type like '%best-actress%'"]
+<ANSWER>:  1983
+
+<QUESTION>:  Where did Loren born?
+<Query>:
+["select pob from person p where p.name like '%Loren%'"]
+<ANSWER>:  Pozzuoli, Italy
+
+<QUESTION>:  Did Spielberg direct Schindler's List?
+<Query>:
+[]
+<ANSWER>:  I don't know
+
+<QUESTION>:  Did Madonna sing Papa Do Not Preach?
+['(']
+<Query>:
+[]
+<ANSWER>:  I don't know
+
+<QUESTION>:  Does the album Thriller include the track Beat It?
+['(']
+<Query>:
+["select count(*) from Track t inner join Album a on a.albumId == t.albumId where a.name like '%Thriller%' and t.name like '%Beat%' and t.name like '%It%'", "select count(*) from Track t inner join Album a on a.albumId == t.albumId where a.name like '%It%' and t.name like '%Thriller%' and t.name like '%Beat%'"]
+<ANSWER>:  yes
+
+<QUESTION>:  Which album by Beyonce was released in 2014?
+<Query>:
+["select a.name from Album a inner join Artist ar on ar.id == a.artsitID where ar.name like '%Beyonce%' and a.releaseDate >= '2014-1-1' and a.releaseDate < '2015-1-1'"]
+<ANSWER>:  1989
+
+<QUESTION>:  Which is the highest mountain in the world?
+<Query>:
+['select m.Name from Mountains m order by m.Height Desc Limit 1']
+<ANSWER>:  Mount Everest
+
+<QUESTION>:  Where is the highest mountain?
+<Query>:
+['select m.Name from Mountains m order by m.Height Desc Limit 1']
+<ANSWER>:  Mount Everest
+
+<QUESTION>:  Which is the deepest ocean?
+<Query>:
+['select s.Ocean from Seas s order by s.Deepest Desc Limit 1']
+<ANSWER>:  Pacific Ocean
+
+<QUESTION>:  Is K2 taller than Makalu?
+<Query>:
+[]
+<ANSWER>:  I don't know
